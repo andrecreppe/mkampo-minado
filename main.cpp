@@ -1,13 +1,26 @@
 #include <iostream>
+#include <conio.h>
 
 #include "menu.h"
+#include "window.h"
 
 using namespace std;
 
 int main() {
+    Window window;
     Menu menu;
 
-    menu.clearScreen();
+    window.initialConfig();
+    window.hideCursor(true);
 
+    window.gotoxy(40, 20);
+    window.textColor(14);
+    menu.showMenu();
+
+    window.gotoxy(50, 30);
+    window.textColor(13);
+    menu.showMenu();
+
+    getch();
     return 0;
 }
