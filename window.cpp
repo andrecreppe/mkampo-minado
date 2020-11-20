@@ -1,6 +1,6 @@
-#include <iostream>
 #include <locale.h>
 #include <windows.h>
+#include <stdio.h>
 
 #include "window.h"
 
@@ -11,7 +11,8 @@ void Window::initialConfig() {
     system("mode con: cols=160 lines=40");
     system("COLOR 70");
 
-    setlocale(LC_ALL, "Portuguese");
+//    setlocale(LC_ALL, "Portuguese");
+//    printf("A á é í ó ú ç");
 }
 
 void Window::gotoxy(int x, int y) {
