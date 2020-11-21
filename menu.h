@@ -4,7 +4,7 @@
 
 class Menu {
     public:
-        void showMenu();
+        int showMenu();
 };
 
 

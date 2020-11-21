@@ -1,4 +1,5 @@
 #include <conio.h>
+#include <iostream>
 
 #include "menu.h"
 #include "window.h"
@@ -12,16 +13,11 @@ int main() {
     window.initialConfig();
     window.hideCursor(true);
 
-    menu.showMenu();
+    int op;
+    do {
+        op = menu.showMenu();
+        window.gotoxy(0,0); cout << op;
+    } while(op != 3);
 
-//    window.gotoxy(40, 20);
-//    window.textColor(14);
-//    menu.showMenu();
-//
-//    window.gotoxy(50, 30);
-//    window.textColor(13);
-//    menu.showMenu();
-
-    getch();
     return 0;
 }
