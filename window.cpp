@@ -8,7 +8,7 @@ void Window::initialConfig() {
     system("TITLE MKampo Minado");
     system("mode con: cols=160 lines=40");
     system("COLOR 70");
-
+    system("cls");
 //    setlocale(LC_ALL, "Portuguese");
 }
 

@@ -1,17 +1,20 @@
-#include <conio.h>
 #include <iostream>
 
 #include "menu.h"
 #include "window.h"
+#include "graphics.h"
 
 using namespace std;
 
 int main() {
+    Graphics graphics;
     Window window;
     Menu menu;
 
     window.initialConfig();
     window.hideCursor(true);
+
+    graphics.drawCanvas();
 
     int op;
     do {
