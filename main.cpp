@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 
 #include "menu.h"
 #include "window.h"
@@ -15,6 +16,7 @@ int main() {
     window.hideCursor(true);
 
     graphics.drawCanvas();
+    graphics.drawMenu();
 
     int op;
     do {

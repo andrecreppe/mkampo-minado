@@ -9,6 +9,7 @@
 class Graphics {
     public:
         void drawCanvas();
+        void drawMenu();
 };
 
 

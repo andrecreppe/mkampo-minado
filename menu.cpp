@@ -10,7 +10,7 @@ int Menu::showMenu() {
     // Menu parameters
     string opt[] = {"Primeira opcao", "Segunda opcao", "Terceira opcao", "Sair"};
 
-    int x = 10, y = 10;
+    int x = 6, y = 4;
     int c0 = 0, c1 = 14, c2 = 12;
 
     // Menu options display
