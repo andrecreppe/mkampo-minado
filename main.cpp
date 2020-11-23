@@ -25,7 +25,8 @@ int main() {
         switch (op) {
             case 0:
                 graphics.drawGameBox();
-//                menu.gameMenu();
+                menu.gameMenu();
+                getch();
                 break;
             case 1:
                 // how to play

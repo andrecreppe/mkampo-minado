@@ -46,8 +46,7 @@ void Graphics::drawBombCanvas() {
 void Graphics::drawGameBox() {
     // Box anchor
     int x = 29, y = 13;
-    int width = 19;
-    int height = 10;
+    int width = 19, height = 10;
 
     // Box maker
 
@@ -63,8 +62,10 @@ void Graphics::drawGameBox() {
         window.gotoxy(x, y+i);printf("%c", 186);
         window.gotoxy(x+width+1, y+i);printf("%c", 186);
 
-        // improve this
-        window.gotoxy(x+1, y+i);printf("%c %c %c %c %c %c %c %c %c %c", 254, 254, 254, 254, 254, 254, 254, 254, 254, 254);
+        for(int j=0; j<18; j+=2) {
+            window.gotoxy(x+1+j, y+i);printf("%c ", 254);
+        }
+        window.gotoxy(x+19, y+i);printf("%c", 254);
     }
 
     window.gotoxy(x,y+height+1);
@@ -78,8 +79,7 @@ void Graphics::drawGameBox() {
 void Graphics::drawMainMenu() {
     // Menu anchor
     int x = 5, y = 3;
-    int width = 14;
-    int height = 4;
+    int width = 14, height = 4;
 
     // Bomb art
     Window window;
@@ -101,4 +101,33 @@ void Graphics::drawMainMenu() {
     printf("%c", 200);
     for(int i=0; i<width; i++) printf("%c", 205);
     printf("%c", 188);
+}
+
+void Graphics::clearMainMenu() {
+    int x = 6, y = 3;
+    int width = 14, height = 5;
+
+    Window window;
+
+    window.gotoxy(x, y);
+    for(int i=0; i<width; i++) printf("%c", 205);
+
+    for(int i=1; i<height; i++) {
+        window.gotoxy(x, y+i);
+        for(int j=0; j<width; j++) {
+            printf(" ");
+        }
+    }
+}
+
+// Gameplay
+
+void Graphics::writeSelection(int val, bool isCol) {
+    int x = 6, y = 4;
+
+    Window window;
+    window.gotoxy(x, y);cout << "  Selecionar";
+    window.gotoxy(x, y+1);printf("coluna (%d) do", val);
+    window.gotoxy(x, y+2);cout << "mkampo minado?";
+    window.gotoxy(x, y+3);cout << "   <Enter>";
 }

@@ -4,7 +4,10 @@
 
 class Menu {
     public:
+        // Main
         int showMainMenu();
+        // Game
+        static void gameMenu();
 };
 
 

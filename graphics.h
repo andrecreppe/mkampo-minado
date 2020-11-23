@@ -5,10 +5,13 @@
 class Graphics {
     public:
         // Design
-        void drawBombCanvas();
-        void drawGameBox();
+        static void drawBombCanvas();
+        static void drawGameBox();
         // Interface
-        void drawMainMenu();
+        static void drawMainMenu();
+        static void clearMainMenu();
+        // Gameplay
+        static void writeSelection(int, bool);
 };
 
 
