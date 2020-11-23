@@ -9,6 +9,7 @@ public:
     // Game
     static int rowSelection();
     static int columnSelection(int);
+    static int cellOperation();
 };
 
 

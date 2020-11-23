@@ -1,3 +1,4 @@
+#include <locale.h>
 #include <windows.h>
 
 #include "window.h"

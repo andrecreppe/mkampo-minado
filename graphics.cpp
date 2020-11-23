@@ -109,6 +109,8 @@ void Graphics::clearMainMenu() {
 
     Window window;
 
+    window.textColor(0);
+
     window.gotoxy(x, y);
     for(int i=0; i<width; i++) printf("%c", 205);
 
