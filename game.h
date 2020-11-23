@@ -3,8 +3,8 @@
 
 
 class Game {
-    public:
-        static void playMineField();
+public:
+    static void playMineField();
 };
 
 

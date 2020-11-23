@@ -1,12 +1,7 @@
-#include <iostream>
-#include <conio.h>
-
 #include "menu.h"
 #include "window.h"
 #include "graphics.h"
 #include "game.h"
-
-using namespace std;
 
 int main() {
     Graphics graphics;

@@ -41,14 +41,11 @@ int Menu::showMainMenu() {
         // Moving the arrow
         if(key == 72 && auxY == y) { // Upper limit
             auxY = maxY;
-        }
-        else if(key == 72 && auxY > y) { // Going up
+        } else if(key == 72 && auxY > y) { // Going up
             auxY--;
-        }
-        else if(key == 80 && auxY < maxY) { // Going down
+        } else if(key == 80 && auxY < maxY) { // Going down
             auxY++;
-        }
-        else if(key == 80 && auxY == maxY) { // Inferior limit
+        } else if(key == 80 && auxY == maxY) { // Inferior limit
             auxY = y;
         }
 
@@ -103,14 +100,11 @@ int Menu::rowSelection() {
         // Moving the arrow
         if(key == 72 && auxY == y) { // Upper limit
             auxY = maxY;
-        }
-        else if(key == 72 && auxY > y) { // Going up
+        } else if(key == 72 && auxY > y) { // Going up
             auxY--;
-        }
-        else if(key == 80 && auxY < maxY) { // Going down
+        } else if(key == 80 && auxY < maxY) { // Going down
             auxY++;
-        }
-        else if(key == 80 && auxY == maxY) { // Inferior limit
+        } else if(key == 80 && auxY == maxY) { // Inferior limit
             auxY = y;
         }
 
@@ -146,7 +140,7 @@ int Menu::columnSelection(int row) {
     graphics.writeSelection(1, true);
 
     int x = 30, y = 14;
-    int c0 = 14, c1 = 13;
+    int color = 14;
 
     int count = 20;
 
@@ -154,7 +148,7 @@ int Menu::columnSelection(int row) {
 
     Window window;
 
-    window.textColor(c0);
+    window.textColor(color);
     for(int i=0; i<10; i++) {
         window.gotoxy(x, y+i);printf("%c", 254);
     }
@@ -170,14 +164,11 @@ int Menu::columnSelection(int row) {
         // Moving the arrow
         if(key == 75 && auxX == x) { // Left limit
             auxX = maxX;
-        }
-        else if(key == 75 && auxX > x) { // Going left
+        } else if(key == 75 && auxX > x) { // Going left
             auxX-=2;
-        }
-        else if(key == 77 && auxX < maxX) { // Going right
+        } else if(key == 77 && auxX < maxX) { // Going right
             auxX+=2;
-        }
-        else if(key == 77 && auxX == maxX) { // Right limit
+        } else if(key == 77 && auxX == maxX) { // Right limit
             auxX = x;
         }
 
@@ -192,7 +183,7 @@ int Menu::columnSelection(int row) {
             window.gotoxy(x+next, y+i);printf("%c", 254);
         }
 
-        window.textColor(c0);
+        window.textColor(color);
         for(int i=0; i<10; i++) {
             window.gotoxy(x+diff, y+i);printf("%c", 254);
         }

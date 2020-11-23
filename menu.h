@@ -3,12 +3,12 @@
 
 
 class Menu {
-    public:
-        // Main
-        static int showMainMenu();
-        // Game
-        static int rowSelection();
-        static int columnSelection(int);
+public:
+    // Main
+    static int showMainMenu();
+    // Game
+    static int rowSelection();
+    static int columnSelection(int);
 };
 
 
