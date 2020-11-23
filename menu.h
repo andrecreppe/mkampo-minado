@@ -5,9 +5,10 @@
 class Menu {
     public:
         // Main
-        int showMainMenu();
+        static int showMainMenu();
         // Game
-        static void gameMenu();
+        static int rowSelection();
+        static int columnSelection(int);
 };
 
 

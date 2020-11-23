@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "window.h"
 #include "graphics.h"
+#include "game.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ int main() {
     Graphics graphics;
     Window window;
     Menu menu;
+    Game game;
 
     window.initialConfig();
     window.hideCursor(true);
@@ -24,9 +26,7 @@ int main() {
 
         switch (op) {
             case 0:
-                graphics.drawGameBox();
-                menu.gameMenu();
-                getch();
+                game.playMineField();
                 break;
             case 1:
                 // how to play

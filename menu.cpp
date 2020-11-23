@@ -71,14 +71,13 @@ int Menu::showMainMenu() {
 
 // Game
 
-void Menu::gameMenu() {
+int Menu::rowSelection() {
     Graphics graphics;
 
     graphics.clearMainMenu();
     graphics.writeSelection(1, false);
 
     int x = 29, y = 14;
-    int width = 19, height = 10;
     int color = 14;
 
     int count = 10;
@@ -133,5 +132,77 @@ void Menu::gameMenu() {
         }
         window.gotoxy(x+19, y+bef);printf("%c", 254);
         window.gotoxy(x+19, y+next);printf("%c", 254);
+
+        graphics.writeSelection(diff+1, false);
     }
+
+    return auxY-y;
+}
+
+int Menu::columnSelection(int row) {
+    Graphics graphics;
+
+    graphics.clearMainMenu();
+    graphics.writeSelection(1, true);
+
+    int x = 30, y = 14;
+    int c0 = 14, c1 = 13;
+
+    int count = 20;
+
+    // Matrix coloring
+
+    Window window;
+
+    window.textColor(c0);
+    for(int i=0; i<10; i++) {
+        window.gotoxy(x, y+i);printf("%c", 254);
+    }
+
+    // Arrow movement
+
+    char key;
+
+    int auxX = x;
+    int maxX = x + count - 2;
+
+    while((key = getch()) != 13) {
+        // Moving the arrow
+        if(key == 75 && auxX == x) { // Left limit
+            auxX = maxX;
+        }
+        else if(key == 75 && auxX > x) { // Going left
+            auxX-=2;
+        }
+        else if(key == 77 && auxX < maxX) { // Going right
+            auxX+=2;
+        }
+        else if(key == 77 && auxX == maxX) { // Right limit
+            auxX = x;
+        }
+
+        // Fixing the text color
+        int diff = auxX - x;
+        int bef = (diff - 2 >= 0) ? diff-2 : maxX-x;
+        int next = (diff + 2 < count) ? diff+2 : 0;
+
+        window.textColor(0);
+        for(int i=0; i<10; i++) {
+            window.gotoxy(x+bef, y+i);printf("%c", 254);
+            window.gotoxy(x+next, y+i);printf("%c", 254);
+        }
+
+        window.textColor(c0);
+        for(int i=0; i<10; i++) {
+            window.gotoxy(x+diff, y+i);printf("%c", 254);
+        }
+
+        // Restore selected row
+        window.gotoxy(x+bef, y+row);printf("%c", 254);
+        window.gotoxy(x+next, y+row);printf("%c", 254);
+
+        graphics.writeSelection(diff+1, false);
+    }
+
+    return auxX-x;
 }

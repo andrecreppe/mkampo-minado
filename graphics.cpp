@@ -125,9 +125,15 @@ void Graphics::clearMainMenu() {
 void Graphics::writeSelection(int val, bool isCol) {
     int x = 6, y = 4;
 
+    string text[] = {"linha ", "coluna "};
+
     Window window;
+    window.textColor(0);
+
     window.gotoxy(x, y);cout << "  Selecionar";
-    window.gotoxy(x, y+1);printf("coluna (%d) do", val);
+    window.gotoxy(x, y+1);cout << text[isCol];
+    printf("(%d) do", val);
+    if (val < 10) printf(" ");
     window.gotoxy(x, y+2);cout << "mkampo minado?";
     window.gotoxy(x, y+3);cout << "   <Enter>";
 }

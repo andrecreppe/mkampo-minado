@@ -5,12 +5,12 @@
 class Window {
 public:
     // Configuration
-    void initialConfig();
-    void gotoxy(int, int);
+    static void initialConfig();
+    static void gotoxy(int, int);
 
     // Visuals
-    void hideCursor(bool);
-    void textColor(int);
+    static void hideCursor(bool);
+    static void textColor(int);
 };
 
 
