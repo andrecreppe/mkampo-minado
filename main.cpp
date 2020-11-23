@@ -15,14 +15,26 @@ int main() {
     window.initialConfig();
     window.hideCursor(true);
 
-    graphics.drawCanvas();
-    graphics.drawMenu();
+    graphics.drawBombCanvas();
+    graphics.drawMainMenu();
 
     int op;
-    do {
-        op = menu.showMenu();
-        window.gotoxy(0,0); cout << op;
-    } while(op != 3);
+    while(true) {
+        op = menu.showMainMenu();
 
-    return 0;
+        switch (op) {
+            case 0:
+                graphics.drawGameBox();
+//                menu.gameMenu();
+                break;
+            case 1:
+                // how to play
+                break;
+            case 2:
+                // about
+                break;
+            case 3:
+                return 0;
+        }
+    }
 }

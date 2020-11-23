@@ -6,11 +6,11 @@
 
 using namespace std;
 
-int Menu::showMenu() {
+int Menu::showMainMenu() {
     // Menu parameters
-    string opt[] = {"Primeira opcao", "Segunda opcao", "Terceira opcao", "Sair"};
+    string opt[] = {"Jogar", "Tutorial", "Sobre", "Sair"};
 
-    int x = 6, y = 4;
+    int x = 7, y = 4;
     int c0 = 0, c1 = 14, c2 = 12;
 
     // Menu options display
