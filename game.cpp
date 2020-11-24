@@ -21,6 +21,8 @@ void Game::playMineField() {
 
     initializeField();
 
+    int points = 0;
+
     while(true) {
         graphics.drawGameBox(graphicField);
 
@@ -33,12 +35,13 @@ void Game::playMineField() {
             case 0:
                 if(mineField[y][x] == -2) {
                     graphics.showMines(mineField);
-                    graphics.gameOver();
+                    graphics.gameOver(points);
                     getch();
                     return;
                 }
 
                 count3x3(y, x);
+                points++;
                 break;
             case 1:
                 graphicField[y][x] = -1;

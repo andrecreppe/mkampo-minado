@@ -14,7 +14,7 @@ public:
     static void writeSelection(int, bool);
     static int getFieldChar(int);
     static void showMines(int[10][10]);
-    static void gameOver();
+    static void gameOver(int);
 };
 
 

@@ -194,16 +194,17 @@ void Graphics::showMines(int field[10][10]) {
     }
 }
 
-void Graphics::gameOver() {
+void Graphics::gameOver(int points) {
     clearMainMenu();
 
     int x = 6, y = 3;
 
     Window window;
     window.textColor(12);
-    window.gotoxy(x+1, y);cout << " GAME OVER! ";
+    window.gotoxy(x+1, y);printf(" GAME OVER! ");
 
     window.textColor(0);
-    window.gotoxy(x, y+2);cout << "Tecle algo pra";
-    window.gotoxy(x, y+3);cout << "voltar ao menu";
+    window.gotoxy(x, y+1);printf("Pontos: (%d)", points);
+    window.gotoxy(x, y+3);printf("Tecle algo pra");
+    window.gotoxy(x, y+4);printf("voltar ao menu");
 }
