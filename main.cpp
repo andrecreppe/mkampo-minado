@@ -12,11 +12,11 @@ int main() {
     window.initialConfig();
     window.hideCursor(true);
 
-    graphics.drawBombCanvas();
-    graphics.drawMainMenu();
-
     int op;
     while(true) {
+        graphics.drawBombCanvas();
+        graphics.drawMainMenu();
+
         op = menu.showMainMenu();
 
         switch (op) {

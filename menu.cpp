@@ -67,13 +67,11 @@ int Menu::showMainMenu() {
     return auxY - y;
 }
 
-
 // Game
 
 int Menu::rowSelection(int field[10][10]) {
     Graphics graphics;
 
-    graphics.clearMainMenu();
     graphics.writeSelection(1, false);
 
     int x = 29, y = 14;
@@ -90,12 +88,12 @@ int Menu::rowSelection(int field[10][10]) {
     window.textColor(color);
     for(int j=0; j<18; j+=2) {
         val = field[0][j/2];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = graphics.getFieldChar(val);
 
         window.gotoxy(x+1+j, y);printf("%c ", mchar);
     }
     val = field[0][9];
-    mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+    mchar = graphics.getFieldChar(val);
 
     window.gotoxy(x+19, y);printf("%c", mchar);
 
@@ -128,34 +126,34 @@ int Menu::rowSelection(int field[10][10]) {
         window.textColor(color);
         for(int j=0; j<18; j+=2) {
             val = field[diff][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+            mchar = graphics.getFieldChar(val);
 
             window.gotoxy(x+1+j, y+diff);printf("%c ", mchar);
         }
         val = field[diff][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = graphics.getFieldChar(val);
 
         window.gotoxy(x+19, y+diff);printf("%c", mchar);
 
         window.textColor(0);
         for(int j=0; j<18; j+=2) {
             val = field[bef][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+            mchar = graphics.getFieldChar(val);
 
             window.gotoxy(x+1+j, y+bef);printf("%c ", mchar);
 
             val = field[next][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+            mchar = graphics.getFieldChar(val);
 
             window.gotoxy(x+1+j, y+next);printf("%c ", mchar);
         }
         val = field[bef][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = graphics.getFieldChar(val);
 
         window.gotoxy(x+19, y+bef);printf("%c", mchar);
 
         val = field[next][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = graphics.getFieldChar(val);
 
         window.gotoxy(x+19, y+next);printf("%c", mchar);
 
@@ -184,7 +182,7 @@ int Menu::columnSelection(int row, int field[10][10]) {
     window.textColor(color);
     for(int i=0; i<10; i++) {
         val = field[i][0];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = graphics.getFieldChar(val);
 
         window.gotoxy(x, y+i);printf("%c", mchar);
     }
@@ -237,12 +235,12 @@ int Menu::columnSelection(int row, int field[10][10]) {
         window.textColor(0);
         for(int i=0; i<10; i++) {
             val = field[i][matBef];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+            mchar = graphics.getFieldChar(val);
 
             window.gotoxy(x+bef, y+i);printf("%c", mchar);
 
             val = field[i][matNext];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+            mchar = graphics.getFieldChar(val);
 
             window.gotoxy(x+next, y+i);printf("%c", mchar);
         }
@@ -250,19 +248,19 @@ int Menu::columnSelection(int row, int field[10][10]) {
         window.textColor(color);
         for(int i=0; i<10; i++) {
             val = field[i][diff/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+            mchar = graphics.getFieldChar(val);
 
             window.gotoxy(x+diff, y+i);printf("%c", mchar);
         }
 
         // Restore selected row
         val = field[row][matBef];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = graphics.getFieldChar(val);
 
         window.gotoxy(x+bef, y+row);printf("%c", mchar);
 
         val = field[row][matNext];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = graphics.getFieldChar(val);
 
         window.gotoxy(x+next, y+row);printf("%c", mchar);
 

@@ -11,42 +11,45 @@
 #include <stdio.h>
 
 // 0 = hidden, -1 = flagged, -2 = bomb!
-// 1 - 10 = bomb count (+1)
-int field[10][10];
+// 1 - 10 = bomb count (1 => 0, ..., 10 => 9)
+int mineField[10][10];
+int graphicField[10][10];
 
 void Game::playMineField() {
     Menu menu;
     Graphics graphics;
 
-    Game::initializeField();
+    initializeField();
 
     while(true) {
-        graphics.drawGameBox(field);
+        graphics.drawGameBox(graphicField);
 
-        int y = menu.rowSelection(field);
-        int x = menu.columnSelection(y, field);
+        int y = menu.rowSelection(graphicField);
+        int x = menu.columnSelection(y, graphicField);
 
         int op = menu.cellOperation();
 
         switch (op) {
             case 0:
-                if(field[y][x] == -2) {
-                    Window::gotoxy(0, 15);
-                    printf("GAME OVER");
+                if(mineField[y][x] == -2) {
+                    graphics.showMines(mineField);
+                    graphics.gameOver();
+                    getch();
                     return;
                 }
 
                 count3x3(y, x);
                 break;
             case 1:
-                // mark
+                graphicField[y][x] = -1;
                 break;
         }
     }
 }
 
 void Game::initializeField() {
-    memset(field, 0, sizeof(field)); // fill with 0
+    memset(mineField, 0, sizeof(mineField)); // fill with 0
+    memset(graphicField, 0, sizeof(graphicField)); // fill with 0
 
     srand(time(NULL));
 
@@ -56,8 +59,8 @@ void Game::initializeField() {
         int x = rand() % 10; // 0 - 9
         int y = rand() % 10; // 0 - 9
 
-        if(field[y][x] == 0) {
-            field[y][x] = -2;
+        if(mineField[y][x] == 0) {
+            mineField[y][x] = -2;
         } else {
             i--;
         }
@@ -75,10 +78,10 @@ void Game::count3x3(int y, int x) {
             if(i == 0 && j == 0) continue;
             if(posx < 0 || posy < 0) continue;
 
-            int val = field[posy][posx];
+            int val = mineField[posy][posx];
             if(val == -2) count++;
         }
     }
 
-    field[y][x] = count+1;
+    graphicField[y][x] = count+1;
 }

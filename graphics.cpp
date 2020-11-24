@@ -66,12 +66,12 @@ void Graphics::drawGameBox(int field[10][10]) {
 
         for(int j=0; j<18; j+=2) {
             val = field[i-1][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+            mchar = getFieldChar(val);
 
             window.gotoxy(x+1+j, y+i);printf("%c ", mchar);
         }
         val = field[i-1][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
+        mchar = getFieldChar(val);
 
         window.gotoxy(x+19, y+i);printf("%c", mchar);
     }
@@ -90,6 +90,8 @@ void Graphics::drawMainMenu() {
     int width = 14, height = 4;
 
     // Bomb art
+    clearMainMenu();
+
     Window window;
     window.textColor(0);
 
@@ -137,6 +139,8 @@ void Graphics::writeSelection(int val, bool isCol) {
 
     string text[] = {"linha ", "coluna "};
 
+    clearMainMenu();
+
     Window window;
     window.textColor(0);
 
@@ -146,4 +150,60 @@ void Graphics::writeSelection(int val, bool isCol) {
     if (val < 10) printf(" ");
     window.gotoxy(x, y+2);cout << "mkampo minado?";
     window.gotoxy(x, y+3);cout << "   <Enter>";
+}
+
+int Graphics::getFieldChar(int val) {
+    // 0 = hidden, -1 = flagged, -2 = bomb!
+    // 1 - 10 = bomb count (1 => 0, ..., 10 => 9)
+
+    int hidden = 254;
+    int bomb = 35;
+    int flag = 33;
+    int empty = 46;
+
+    if(val == 0) {
+        return hidden;
+    } else if(val == -1) {
+        return flag;
+    } else if(val == -2) {
+        return bomb;
+    }
+
+    if(val == 1) {
+        return empty;
+    }
+
+    return (47 + val);
+}
+
+void Graphics::showMines(int field[10][10]) {
+    int x = 30, y = 14;
+    int mineColor = 12;
+
+    Window window;
+
+    window.textColor(mineColor);
+
+    for(int i=0; i<10; i++) {
+        for(int j=0; j<10; j++) {
+            if(field[j][i] == -2) {
+                window.gotoxy(x+(2*i), y+j);
+                printf("%c", getFieldChar(-2));
+            }
+        }
+    }
+}
+
+void Graphics::gameOver() {
+    clearMainMenu();
+
+    int x = 6, y = 3;
+
+    Window window;
+    window.textColor(12);
+    window.gotoxy(x+1, y);cout << " GAME OVER! ";
+
+    window.textColor(0);
+    window.gotoxy(x, y+2);cout << "Tecle algo pra";
+    window.gotoxy(x, y+3);cout << "voltar ao menu";
 }
