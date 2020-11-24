@@ -68,7 +68,7 @@ int Menu::showMainMenu() {
 
 // Game
 
-int Menu::rowSelection() {
+int Menu::rowSelection(int field[10][10]) {
     Graphics graphics;
 
     graphics.clearMainMenu();
@@ -83,11 +83,19 @@ int Menu::rowSelection() {
 
     Window window;
 
+    int val, mchar;
+
     window.textColor(color);
     for(int j=0; j<18; j+=2) {
-        window.gotoxy(x+1+j, y);printf("%c ", 254);
+        val = field[0][j/2];
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+        window.gotoxy(x+1+j, y);printf("%c ", mchar);
     }
-    window.gotoxy(x+19, y);printf("%c", 254);
+    val = field[0][9];
+    mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+    window.gotoxy(x+19, y);printf("%c", mchar);
 
     // Arrow movement
 
@@ -115,17 +123,37 @@ int Menu::rowSelection() {
 
         window.textColor(color);
         for(int j=0; j<18; j+=2) {
-            window.gotoxy(x+1+j, y+diff);printf("%c ", 254);
+            val = field[diff][j/2];
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+            window.gotoxy(x+1+j, y+diff);printf("%c ", mchar);
         }
-        window.gotoxy(x+19, y+diff);printf("%c", 254);
+        val = field[diff][9];
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+        window.gotoxy(x+19, y+diff);printf("%c", mchar);
 
         window.textColor(0);
         for(int j=0; j<18; j+=2) {
-            window.gotoxy(x+1+j, y+bef);printf("%c ", 254);
-            window.gotoxy(x+1+j, y+next);printf("%c ", 254);
+            val = field[bef][j/2];
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+            window.gotoxy(x+1+j, y+bef);printf("%c ", mchar);
+
+            val = field[next][j/2];
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+            window.gotoxy(x+1+j, y+next);printf("%c ", mchar);
         }
-        window.gotoxy(x+19, y+bef);printf("%c", 254);
-        window.gotoxy(x+19, y+next);printf("%c", 254);
+        val = field[bef][9];
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+        window.gotoxy(x+19, y+bef);printf("%c", mchar);
+
+        val = field[next][9];
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+        window.gotoxy(x+19, y+next);printf("%c", mchar);
 
         graphics.writeSelection(diff+1, false);
     }
@@ -133,7 +161,7 @@ int Menu::rowSelection() {
     return auxY-y;
 }
 
-int Menu::columnSelection(int row) {
+int Menu::columnSelection(int row, int field[10][10]) {
     Graphics graphics;
 
     graphics.writeSelection(1, true);
@@ -147,9 +175,14 @@ int Menu::columnSelection(int row) {
 
     Window window;
 
+    int val, mchar;
+
     window.textColor(color);
     for(int i=0; i<10; i++) {
-        window.gotoxy(x, y+i);printf("%c", 254);
+        val = field[i/2][0];
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+        window.gotoxy(x, y+i);printf("%c", mchar);
     }
 
     // Arrow movement
@@ -178,18 +211,35 @@ int Menu::columnSelection(int row) {
 
         window.textColor(0);
         for(int i=0; i<10; i++) {
-            window.gotoxy(x+bef, y+i);printf("%c", 254);
-            window.gotoxy(x+next, y+i);printf("%c", 254);
+            val = field[i][bef/2];
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+            window.gotoxy(x+bef, y+i);printf("%c", mchar);
+
+            val = field[i][next/2];
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+            window.gotoxy(x+next, y+i);printf("%c", mchar);
         }
 
         window.textColor(color);
         for(int i=0; i<10; i++) {
-            window.gotoxy(x+diff, y+i);printf("%c", 254);
+            val = field[i][diff];
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+            window.gotoxy(x+diff, y+i);printf("%c", mchar);
         }
 
         // Restore selected row
-        window.gotoxy(x+bef, y+row);printf("%c", 254);
-        window.gotoxy(x+next, y+row);printf("%c", 254);
+        val = field[row][bef];
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+        window.gotoxy(x+bef, y+row);printf("%c", mchar);
+
+        val = field[row][next];
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+
+        window.gotoxy(x+next, y+row);printf("%c", mchar);
 
         int decimal = (diff+2)/2;
         graphics.writeSelection(decimal, true);

@@ -6,7 +6,7 @@ class Graphics {
 public:
     // Design
     static void drawBombCanvas();
-    static void drawGameBox();
+    static void drawGameBox(int[10][10]);
     // Interface
     static void drawMainMenu();
     static void clearMainMenu();

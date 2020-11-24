@@ -5,6 +5,9 @@
 class Game {
 public:
     static void playMineField();
+    static void initializeField();
+    static void stepOn(int, int);
+    static void reveal3x3(int, int);
 };
 
 
