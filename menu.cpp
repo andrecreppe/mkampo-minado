@@ -47,6 +47,8 @@ int Menu::showMainMenu() {
             auxY++;
         } else if(key == 80 && auxY == maxY) { // Inferior limit
             auxY = y;
+        } else {
+            continue;
         }
 
         // Fixing the text color
@@ -88,12 +90,12 @@ int Menu::rowSelection(int field[10][10]) {
     window.textColor(color);
     for(int j=0; j<18; j+=2) {
         val = field[0][j/2];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x+1+j, y);printf("%c ", mchar);
     }
     val = field[0][9];
-    mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+    mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
     window.gotoxy(x+19, y);printf("%c", mchar);
 
@@ -114,6 +116,8 @@ int Menu::rowSelection(int field[10][10]) {
             auxY++;
         } else if(key == 80 && auxY == maxY) { // Inferior limit
             auxY = y;
+        } else {
+            continue;
         }
 
         // Fixing the text color
@@ -124,34 +128,34 @@ int Menu::rowSelection(int field[10][10]) {
         window.textColor(color);
         for(int j=0; j<18; j+=2) {
             val = field[diff][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
             window.gotoxy(x+1+j, y+diff);printf("%c ", mchar);
         }
         val = field[diff][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x+19, y+diff);printf("%c", mchar);
 
         window.textColor(0);
         for(int j=0; j<18; j+=2) {
             val = field[bef][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
             window.gotoxy(x+1+j, y+bef);printf("%c ", mchar);
 
             val = field[next][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
             window.gotoxy(x+1+j, y+next);printf("%c ", mchar);
         }
         val = field[bef][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x+19, y+bef);printf("%c", mchar);
 
         val = field[next][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x+19, y+next);printf("%c", mchar);
 
@@ -180,7 +184,7 @@ int Menu::columnSelection(int row, int field[10][10]) {
     window.textColor(color);
     for(int i=0; i<10; i++) {
         val = field[i][0];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x, y+i);printf("%c", mchar);
     }
@@ -199,8 +203,8 @@ int Menu::columnSelection(int row, int field[10][10]) {
         // Moving the arrow
         if(key == 75 && auxX == x) { // Left limit
             auxX = maxX;
-            matBef = 1;
-            matNext = 9;
+            matBef = 8;
+            matNext = 0;
         } else if(key == 75 && auxX > x) { // Going left
             auxX-=2;
             matBef--;
@@ -213,13 +217,17 @@ int Menu::columnSelection(int row, int field[10][10]) {
             auxX = x;
             matBef = 9;
             matNext = 1;
+        } else {
+            continue;
         }
 
-        matBef = (0 <= matBef && matBef <= 9) ? matBef : 0;
-        matNext = (0 <= matNext && matNext <= 9) ? matNext : 0;
-
-        window.gotoxy(0,15);printf("matBef: %d ", matBef);
-        window.gotoxy(0,16);printf("matNext: %d ", matNext);
+        if(key == 75) {
+            matBef = (matBef < 0) ? 9 : matBef;
+            matNext = (matNext < 0) ? 9 : matNext;
+        } else {
+            matBef = (matBef > 9) ? 0 : matBef;
+            matNext = (matNext > 9) ? 0 : matNext;
+        }
 
         // Fixing the text color
         int diff = auxX - x;
@@ -229,12 +237,12 @@ int Menu::columnSelection(int row, int field[10][10]) {
         window.textColor(0);
         for(int i=0; i<10; i++) {
             val = field[i][matBef];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
             window.gotoxy(x+bef, y+i);printf("%c", mchar);
 
             val = field[i][matNext];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
             window.gotoxy(x+next, y+i);printf("%c", mchar);
         }
@@ -242,19 +250,19 @@ int Menu::columnSelection(int row, int field[10][10]) {
         window.textColor(color);
         for(int i=0; i<10; i++) {
             val = field[i][diff/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
             window.gotoxy(x+diff, y+i);printf("%c", mchar);
         }
 
         // Restore selected row
         val = field[row][matBef];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x+bef, y+row);printf("%c", mchar);
 
         val = field[row][matNext];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x+next, y+row);printf("%c", mchar);
 
@@ -262,7 +270,7 @@ int Menu::columnSelection(int row, int field[10][10]) {
         graphics.writeSelection(decimal, true);
     }
 
-    return auxX-x;
+    return (auxX-x)/2;
 }
 
 int Menu::cellOperation() {
@@ -309,6 +317,8 @@ int Menu::cellOperation() {
             auxY++;
         } else if(key == 80 && auxY == maxY) { // Inferior limit
             auxY = y;
+        } else {
+            continue;
         }
 
         // Fixing the text color

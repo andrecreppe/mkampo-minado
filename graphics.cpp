@@ -66,12 +66,12 @@ void Graphics::drawGameBox(int field[10][10]) {
 
         for(int j=0; j<18; j+=2) {
             val = field[i-1][j/2];
-            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+            mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
             window.gotoxy(x+1+j, y+i);printf("%c ", mchar);
         }
         val = field[i-1][9];
-        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
+        mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 47+val;
 
         window.gotoxy(x+19, y+i);printf("%c", mchar);
     }
