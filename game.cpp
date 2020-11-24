@@ -7,9 +7,6 @@
 #include "graphics.h"
 #include "menu.h"
 
-#include "window.h"
-#include <stdio.h>
-
 // 0 = hidden, -1 = flagged, -2 = bomb!
 // 1 - 10 = bomb count (1 => 0, ..., 10 => 9)
 int mineField[10][10];
@@ -18,10 +15,9 @@ int graphicField[10][10];
 void Game::playMineField() {
     Menu menu;
     Graphics graphics;
+    int points = 0;
 
     initializeField();
-
-    int points = 0;
 
     while(true) {
         graphics.drawGameBox(graphicField);
@@ -32,7 +28,7 @@ void Game::playMineField() {
         int op = menu.cellOperation();
 
         switch (op) {
-            case 0:
+            case 0: // Step on mine
                 if(mineField[y][x] == -2) {
                     graphics.showMines(mineField);
                     graphics.gameOver(points);
@@ -43,7 +39,7 @@ void Game::playMineField() {
                 count3x3(y, x);
                 points++;
                 break;
-            case 1:
+            case 1: // Flag
                 graphicField[y][x] = -1;
                 break;
         }
@@ -64,7 +60,7 @@ void Game::initializeField() {
 
         if(mineField[y][x] == 0) {
             mineField[y][x] = -2;
-        } else {
+        } else { // go again
             i--;
         }
     }

@@ -1,4 +1,4 @@
-#include <locale.h>
+#include <clocale>
 #include <windows.h>
 
 #include "window.h"
@@ -10,7 +10,8 @@ void Window::initialConfig() {
     system("mode con: cols=80 lines=30");
     system("COLOR 70");
     system("cls");
-//    setlocale(LC_ALL, "Portuguese");
+
+    setlocale(LC_ALL, NULL);
 }
 
 void Window::gotoxy(int x, int y) {
