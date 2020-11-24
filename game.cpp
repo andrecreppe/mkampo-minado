@@ -20,8 +20,6 @@ void Game::playMineField() {
 
         graphics.drawGameBox(field);
 
-        getch();
-
         int x = menu.rowSelection(field);
         int y = menu.columnSelection(x, field);
 

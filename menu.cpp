@@ -179,7 +179,7 @@ int Menu::columnSelection(int row, int field[10][10]) {
 
     window.textColor(color);
     for(int i=0; i<10; i++) {
-        val = field[i/2][0];
+        val = field[i][0];
         mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
 
         window.gotoxy(x, y+i);printf("%c", mchar);
@@ -192,17 +192,34 @@ int Menu::columnSelection(int row, int field[10][10]) {
     int auxX = x;
     int maxX = x + count - 2;
 
+    int matBef = 9;
+    int matNext = 1;
+
     while((key = getch()) != 13) {
         // Moving the arrow
         if(key == 75 && auxX == x) { // Left limit
             auxX = maxX;
+            matBef = 1;
+            matNext = 9;
         } else if(key == 75 && auxX > x) { // Going left
             auxX-=2;
+            matBef--;
+            matNext--;
         } else if(key == 77 && auxX < maxX) { // Going right
             auxX+=2;
+            matBef++;
+            matNext++;
         } else if(key == 77 && auxX == maxX) { // Right limit
             auxX = x;
+            matBef = 9;
+            matNext = 1;
         }
+
+        matBef = (0 <= matBef && matBef <= 9) ? matBef : 0;
+        matNext = (0 <= matNext && matNext <= 9) ? matNext : 0;
+
+        window.gotoxy(0,15);printf("matBef: %d ", matBef);
+        window.gotoxy(0,16);printf("matNext: %d ", matNext);
 
         // Fixing the text color
         int diff = auxX - x;
@@ -211,12 +228,12 @@ int Menu::columnSelection(int row, int field[10][10]) {
 
         window.textColor(0);
         for(int i=0; i<10; i++) {
-            val = field[i][bef/2];
+            val = field[i][matBef];
             mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
 
             window.gotoxy(x+bef, y+i);printf("%c", mchar);
 
-            val = field[i][next/2];
+            val = field[i][matNext];
             mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
 
             window.gotoxy(x+next, y+i);printf("%c", mchar);
@@ -224,19 +241,19 @@ int Menu::columnSelection(int row, int field[10][10]) {
 
         window.textColor(color);
         for(int i=0; i<10; i++) {
-            val = field[i][diff];
+            val = field[i][diff/2];
             mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
 
             window.gotoxy(x+diff, y+i);printf("%c", mchar);
         }
 
         // Restore selected row
-        val = field[row][bef];
+        val = field[row][matBef];
         mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
 
         window.gotoxy(x+bef, y+row);printf("%c", mchar);
 
-        val = field[row][next];
+        val = field[row][matNext];
         mchar = (val == 0) ? 254 : (val == -1) ? 64 : (val == -2) ? 33 : 48+val;
 
         window.gotoxy(x+next, y+row);printf("%c", mchar);

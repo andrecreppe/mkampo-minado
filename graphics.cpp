@@ -44,13 +44,6 @@ void Graphics::drawBombCanvas() {
 }
 
 void Graphics::drawGameBox(int field[10][10]) {
-//    for(int i=0; i<10; i++) {
-//        for(int j=0; j<10; j++) {
-//            printf("%d ", field[i][j]);
-//        }
-//        printf("\n");
-//    }
-
     // Box anchor
     int x = 29, y = 13;
     int width = 19, height = 10;
