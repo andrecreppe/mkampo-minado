@@ -24,7 +24,7 @@ int main() {
                 game.playMineField();
                 break;
             case 1:
-                // how to play
+                graphics.tutorial();
                 break;
             case 2:
                 // about

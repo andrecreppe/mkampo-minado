@@ -14,6 +14,8 @@ void Graphics::drawBombCanvas() {
     // ASCII Drawing
     Window window;
 
+    system("cls");
+
     window.textColor(0);
 
     window.gotoxy(x, y);   cout << "              . . .";
@@ -80,6 +82,54 @@ void Graphics::drawGameBox(int field[10][10]) {
     printf("%c", 200);
     for(int i=0; i<width; i++) printf("%c", 205);
     printf("%c", 188);
+}
+
+void Graphics::drawTNT() {
+    // TNT anchor
+    int x = 0, y = 0;
+
+    // TNT drawing
+
+    Window window;
+
+    window.gotoxy(x,y);printf("      )");
+    window.gotoxy(x,y+1);printf("     (");
+    window.gotoxy(x,y+2);printf("    .-`-.");
+    window.gotoxy(x,y+3);printf("    :   :");
+    window.gotoxy(x,y+4);printf("    :TNT:");
+    window.gotoxy(x,y+5);printf("    :___:");
+}
+
+void Graphics::tutorial() {
+    // Box anchor
+    int x = 9, y = 6;
+    int width = 60, height = 15;
+
+    // Box maker
+
+    system("cls");
+
+    drawTNT();
+
+    Window window;
+    window.textColor(0);
+
+    window.gotoxy(x,y);
+    printf("%c", 201);
+    for(int i=0; i<width; i++) printf("%c", 205);
+    printf("%c", 187);
+
+    for(int i=1; i<=height; i++) {
+        window.gotoxy(x, y+i);printf("%c", 186);
+        window.gotoxy(x+width+1, y+i);printf("%c", 186);
+    }
+
+    window.gotoxy(x,y+height+1);
+    printf("%c", 200);
+    for(int i=0; i<width; i++) printf("%c", 205);
+    printf("%c", 188);
+
+    getchar();
 }
 
 // Interface
