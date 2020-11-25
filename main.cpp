@@ -27,7 +27,7 @@ int main() {
                 graphics.tutorial();
                 break;
             case 2:
-                // about
+                graphics.about();
                 break;
             case 3:
                 return 0;

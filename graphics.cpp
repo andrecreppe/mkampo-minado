@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 
 #include "graphics.h"
 #include "window.h"
@@ -6,20 +7,6 @@
 using namespace std;
 
 // Design
-
-/*
-             %@@@@@@@@@@@@@@@@@@@@  *@@@@@@@@@@@@@@@@.   *@@@@@@@@@@@@@@@@,
-             %@         @(        @@                 /@@@,                ,@%
-             %@         @(       (@.         %        /@                   *@,
-             %@         @(       (@           @@                 @@        *@,
-             %@         @(        %@&           %@@              @@        ,@,
-             %@         @(           @@,           @@,           @@        ,@,
-             %@         @(             #@%           #@&         @@########%@,
-             %@         @(                @@          *@         @@
-             %@                   @@                  /@         @@
-              @@,                @@&@/               &@*         @@
-                .#@@@@@@@@@@@@@&,     #@@@@@@@@@@@@@*   @@@@@@@@@@@
- */
 
 void Graphics::drawBombCanvas() {
     // Art anchor
@@ -107,20 +94,44 @@ void Graphics::drawTNTs() {
 
     Window window;
 
-    window.gotoxy(x1,y1);printf("  )");
+    window.gotoxy(x1,y1);  printf("  )");
     window.gotoxy(x1,y1+1);printf(" (");
     window.gotoxy(x1,y1+2);printf(".-`-.");
     window.gotoxy(x1,y1+3);printf(":   :");
     window.gotoxy(x1,y1+4);printf(":TNT:");
     window.gotoxy(x1,y1+5);printf(":___:");
 
-    window.gotoxy(x2,y2);printf("  )");
+    window.gotoxy(x2,y2);  printf("  )");
     window.gotoxy(x2,y2+1);printf(" (");
     window.gotoxy(x2,y2+2);printf(".-`-.");
     window.gotoxy(x2,y2+3);printf(":   :");
     window.gotoxy(x2,y2+4);printf(":TNT:");
     window.gotoxy(x2,y2+5);printf(":___:");
 }
+
+void Graphics::drawUSP() {
+    // Logo anchor
+    int x1 = 8, y1 = 1;
+
+    // Logo drawing
+
+    Window window;
+
+    window.gotoxy(x1,y1);   printf("%@@@@@@@@@@@@@@@@@@@@  *@@@@@@@@@@@@@@@@.   *@@@@@@@@@@@@@@@@,");
+    window.gotoxy(x1,y1+1); printf("%@         @(        @@                 /@@@,                ,@%");
+    window.gotoxy(x1,y1+2); printf("%@         @(       (@.         %        /@                   *@,");
+    window.gotoxy(x1,y1+3); printf("%@         @(       (@           @@                 @@        *@,");
+    window.gotoxy(x1,y1+4); printf("%@         @(       (@           @@                 @@        *@,");
+    window.gotoxy(x1,y1+5); printf("%@         @(        %@&           %@@              @@        ,@,");
+    window.gotoxy(x1,y1+6); printf("%@         @(           @@,           @@,           @@        ,@,");
+    window.gotoxy(x1,y1+7); printf("%@         @(             #@%           #@&         @@########%@,");
+    window.gotoxy(x1,y1+8); printf("%@         @(                @@          *@         @@");
+    window.gotoxy(x1,y1+9); printf("%@                   @@                  /@         @@");
+    window.gotoxy(x1,y1+10);printf(" @@,                @@&@/               &@*         @@");
+    window.gotoxy(x1,y1+11);printf("   .#@@@@@@@@@@@@@&,     #@@@@@@@@@@@@@*   @@@@@@@@@@@");
+}
+
+// Pages
 
 void Graphics::tutorial() {
     // Box anchor
@@ -156,8 +167,6 @@ void Graphics::tutorial() {
 
     // Text writer
 
-    setlocale(LC_ALL, "Portuguese");
-
     window.textColor(9);
     window.gotoxy(x+padR, y+2);printf("OBJETIVO:");
 
@@ -186,11 +195,66 @@ void Graphics::tutorial() {
     window.textColor(0);
     window.gotoxy(x+padR, y+19);printf("   Cada casa descoberta garante 1 ponto ao jogador.");
 
+    window.textColor(15);
     window.gotoxy(x+14, y+21);printf("<Aperte qualquer tecla para voltar>");
 
-    setlocale(LC_ALL, "C");
+    getch();
+}
 
-    getchar();
+void Graphics::about() {
+    // Box anchor
+    int x = 8, y = 15;
+    int width = 62, height = 12;
+    int padR = 2;
+
+    // Box maker
+
+    system("cls");
+
+    drawUSP();
+
+    Window window;
+    window.textColor(0);
+
+    window.gotoxy(x,y);
+    printf("%c", 201);
+    for(int i=0; i<28; i++) printf("%c", 205);
+    printf(" SOBRE ");
+    for(int i=35; i<width; i++) printf("%c", 205);
+    printf("%c", 187);
+
+    for(int i=1; i<=height; i++) {
+        window.gotoxy(x, y+i);printf("%c", 186);
+        window.gotoxy(x+width+1, y+i);printf("%c", 186);
+    }
+
+    window.gotoxy(x,y+height+1);
+    printf("%c", 200);
+    for(int i=0; i<width; i++) printf("%c", 205);
+    printf("%c", 188);
+
+    // Text writer
+
+    window.textColor(9);
+    window.gotoxy(x+padR, y+2);printf("DISCIPLINA:");
+
+    window.textColor(0);
+    window.gotoxy(x+padR, y+3);printf("SEM0580 - Topicos em Computacao (2020)");
+    window.gotoxy(x+padR, y+4);printf("Prof. Dr. Mario Luiz Tronco");
+
+    window.textColor(9);
+    window.gotoxy(x+padR, y+6);printf("AUTORES:");
+
+    window.textColor(0);
+    window.gotoxy(x+padR, y+7);printf("Andre Zanardi Creppe - 11802972");
+    window.gotoxy(x+padR, y+8);printf("Gabriel de Oliveira Maia - 11819790");
+    window.gotoxy(x+padR, y+9);printf("Renan Henrique de Sousa - 11802947");
+    window.gotoxy(x+padR, y+10);printf("Vitor Malosso Micheletti - 10738291");
+
+    window.textColor(15);
+    window.gotoxy(x+14, y+12);printf("<Aperte qualquer tecla para voltar>");
+
+    getch();
 }
 
 // Interface
@@ -260,6 +324,8 @@ void Graphics::writeSelection(int val, bool isCol) {
     printf("(%d) do", val);
     if (val < 10) printf(" ");
     window.gotoxy(x, y+2);cout << "mkampo minado?";
+
+    window.textColor(15);
     window.gotoxy(x, y+3);cout << "   <Enter>";
 }
 
@@ -315,7 +381,9 @@ void Graphics::gameOver(int points) {
     window.gotoxy(x+1, y);printf(" GAME OVER! ");
 
     window.textColor(0);
-    window.gotoxy(x, y+1);printf("Pontos: (%d)", points);
+    window.gotoxy(x, y+1);printf(" Pontos: (%d)", points);
+
+    window.textColor(15);
     window.gotoxy(x, y+3);printf("Tecle algo pra");
     window.gotoxy(x, y+4);printf("voltar ao menu");
 }

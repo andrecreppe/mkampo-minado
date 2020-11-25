@@ -8,7 +8,10 @@ public:
     static void drawBombCanvas();
     static void drawGameBox(int[10][10]);
     static void drawTNTs();
+    static void drawUSP();
+    // Pages
     static void tutorial();
+    static void about();
     // Interface
     static void drawMainMenu();
     static void clearMainMenu();
