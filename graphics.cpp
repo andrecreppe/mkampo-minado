@@ -7,6 +7,20 @@ using namespace std;
 
 // Design
 
+/*
+             %@@@@@@@@@@@@@@@@@@@@  *@@@@@@@@@@@@@@@@.   *@@@@@@@@@@@@@@@@,
+             %@         @(        @@                 /@@@,                ,@%
+             %@         @(       (@.         %        /@                   *@,
+             %@         @(       (@           @@                 @@        *@,
+             %@         @(        %@&           %@@              @@        ,@,
+             %@         @(           @@,           @@,           @@        ,@,
+             %@         @(             #@%           #@&         @@########%@,
+             %@         @(                @@          *@         @@
+             %@                   @@                  /@         @@
+              @@,                @@&@/               &@*         @@
+                .#@@@@@@@@@@@@@&,     #@@@@@@@@@@@@@*   @@@@@@@@@@@
+ */
+
 void Graphics::drawBombCanvas() {
     // Art anchor
     int x = 23, y = 2;
@@ -84,39 +98,50 @@ void Graphics::drawGameBox(int field[10][10]) {
     printf("%c", 188);
 }
 
-void Graphics::drawTNT() {
+void Graphics::drawTNTs() {
     // TNT anchor
-    int x = 0, y = 0;
+    int x1 = 2, y1 = 10;
+    int x2 = 73, y2 = 10;
 
     // TNT drawing
 
     Window window;
 
-    window.gotoxy(x,y);printf("      )");
-    window.gotoxy(x,y+1);printf("     (");
-    window.gotoxy(x,y+2);printf("    .-`-.");
-    window.gotoxy(x,y+3);printf("    :   :");
-    window.gotoxy(x,y+4);printf("    :TNT:");
-    window.gotoxy(x,y+5);printf("    :___:");
+    window.gotoxy(x1,y1);printf("  )");
+    window.gotoxy(x1,y1+1);printf(" (");
+    window.gotoxy(x1,y1+2);printf(".-`-.");
+    window.gotoxy(x1,y1+3);printf(":   :");
+    window.gotoxy(x1,y1+4);printf(":TNT:");
+    window.gotoxy(x1,y1+5);printf(":___:");
+
+    window.gotoxy(x2,y2);printf("  )");
+    window.gotoxy(x2,y2+1);printf(" (");
+    window.gotoxy(x2,y2+2);printf(".-`-.");
+    window.gotoxy(x2,y2+3);printf(":   :");
+    window.gotoxy(x2,y2+4);printf(":TNT:");
+    window.gotoxy(x2,y2+5);printf(":___:");
 }
 
 void Graphics::tutorial() {
     // Box anchor
-    int x = 9, y = 6;
-    int width = 60, height = 15;
+    int x = 8, y = 3;
+    int width = 62, height = 21;
+    int padR = 2;
 
     // Box maker
 
     system("cls");
 
-    drawTNT();
+    drawTNTs();
 
     Window window;
     window.textColor(0);
 
     window.gotoxy(x,y);
     printf("%c", 201);
-    for(int i=0; i<width; i++) printf("%c", 205);
+    for(int i=0; i<26; i++) printf("%c", 205);
+    printf(" TUTORIAL ");
+    for(int i=36; i<width; i++) printf("%c", 205);
     printf("%c", 187);
 
     for(int i=1; i<=height; i++) {
@@ -128,6 +153,42 @@ void Graphics::tutorial() {
     printf("%c", 200);
     for(int i=0; i<width; i++) printf("%c", 205);
     printf("%c", 188);
+
+    // Text writer
+
+    setlocale(LC_ALL, "Portuguese");
+
+    window.textColor(9);
+    window.gotoxy(x+padR, y+2);printf("OBJETIVO:");
+
+    window.textColor(0);
+    window.gotoxy(x+padR, y+3);printf("  Descobrir todas as casas do campo sem que alguma exploda.");
+
+    window.textColor(9);
+    window.gotoxy(x+padR, y+5);printf("O JOGO:");
+
+    window.textColor(0);
+    window.gotoxy(x+padR, y+6);printf("  Para selecionar um quadrado basta navegar usando as setas");
+    window.gotoxy(x+padR, y+7);printf("do teclado por meio de linhas e depois colunas e comfirmar.");
+
+    window.gotoxy(x+padR, y+9);printf("  Caso uma das 12 minas (#) seja descoberta, o jogo acaba.");
+    window.gotoxy(x+padR, y+10);printf("Se um quadrado vazio for descoberto, um numero aparece para");
+    window.gotoxy(x+padR, y+11);printf("informar quantas minas estao escondidas nos 8 quadrados");
+    window.gotoxy(x+padR, y+12);printf("adjacentes. Esse dado pode ser usado para deduzir em quais");
+    window.gotoxy(x+padR, y+13);printf("outros quadrados existe, ou nao, bombas.");
+
+    window.gotoxy(x+padR, y+15);printf("  Para evitar 'acidentes', pode-se marcar uma casa com uma");
+    window.gotoxy(x+padR, y+16);printf("bandeira onde achar que existe uma mina.");
+
+    window.textColor(9);
+    window.gotoxy(x+padR, y+18);printf("PONTOS:");
+
+    window.textColor(0);
+    window.gotoxy(x+padR, y+19);printf("   Cada casa descoberta garante 1 ponto ao jogador.");
+
+    window.gotoxy(x+14, y+21);printf("<Aperte qualquer tecla para voltar>");
+
+    setlocale(LC_ALL, "C");
 
     getchar();
 }

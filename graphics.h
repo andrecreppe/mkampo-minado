@@ -7,7 +7,7 @@ public:
     // Design
     static void drawBombCanvas();
     static void drawGameBox(int[10][10]);
-    static void drawTNT();
+    static void drawTNTs();
     static void tutorial();
     // Interface
     static void drawMainMenu();
