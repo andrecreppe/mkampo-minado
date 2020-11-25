@@ -390,14 +390,20 @@ void Graphics::showMines(int field[10][10]) {
     }
 }
 
-void Graphics::gameOver(int points) {
+void Graphics::gameOver(int points, bool didWin) {
     clearMainMenu();
 
     int x = 6, y = 3;
 
     Window window;
-    window.textColor(12);
-    window.gotoxy(x+1, y);printf(" GAME OVER! ");
+
+    if(didWin) {
+        window.textColor(10);
+        window.gotoxy(x+2, y);printf(" VITORIA! ");
+    } else {
+        window.textColor(12);
+        window.gotoxy(x+1, y);printf(" GAME OVER! ");
+    }
 
     window.textColor(0);
     window.gotoxy(x, y+1);printf(" Pontos: (%d)", points);

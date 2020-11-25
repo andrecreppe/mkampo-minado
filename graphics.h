@@ -20,7 +20,7 @@ public:
     static void writeSelection(int, bool);
     static int getFieldChar(int);
     static void showMines(int[10][10]);
-    static void gameOver(int);
+    static void gameOver(int, bool);
     // Animations
     static void loading();
     static void exiting();

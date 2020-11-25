@@ -16,11 +16,19 @@ void Game::playMineField() {
     Menu menu;
     Graphics graphics;
     int points = 0;
+    int maxPoints = 2;
 
     initializeField();
 
     while(true) {
         graphics.drawGameBox(graphicField);
+
+        if(points == maxPoints) {
+            graphics.showMines(mineField);
+            graphics.gameOver(points, true);
+            getch();
+            return;
+        }
 
         int y = menu.rowSelection(graphicField);
         int x = menu.columnSelection(y, graphicField);
@@ -31,7 +39,7 @@ void Game::playMineField() {
             case 0: // Step on mine
                 if(mineField[y][x] == -2) {
                     graphics.showMines(mineField);
-                    graphics.gameOver(points);
+                    graphics.gameOver(points, false);
                     getch();
                     return;
                 }
