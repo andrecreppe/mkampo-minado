@@ -32,8 +32,11 @@ int main() {
                 graphics.about();
                 break;
             case 3:
-                graphics.exiting();
-                return 0;
+                if(menu.exitMenu() == 0) {
+                    graphics.exiting();
+                    return 0;
+                }
+                break;
         }
     }
 }

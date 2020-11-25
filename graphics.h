@@ -15,6 +15,7 @@ public:
     // Interface
     static void drawMainMenu();
     static void clearMainMenu();
+    static void drawExitMenu();
     // Gameplay
     static void writeSelection(int, bool);
     static int getFieldChar(int);

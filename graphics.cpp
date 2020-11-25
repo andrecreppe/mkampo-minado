@@ -241,17 +241,17 @@ void Graphics::about() {
     window.gotoxy(x+padR, y+2);printf("DISCIPLINA:");
 
     window.textColor(0);
-    window.gotoxy(x+padR, y+3);printf("SEM0580 - Topicos em Computacao (2020)");
-    window.gotoxy(x+padR, y+4);printf("Prof. Dr. Mario Luiz Tronco");
+    window.gotoxy(x+padR, y+3);printf("  SEM0580 - Topicos em Computacao (2020)");
+    window.gotoxy(x+padR, y+4);printf("  Prof. Dr. Mario Luiz Tronco");
 
     window.textColor(9);
     window.gotoxy(x+padR, y+6);printf("AUTORES:");
 
     window.textColor(0);
-    window.gotoxy(x+padR, y+7);printf("Andre Zanardi Creppe - 11802972");
-    window.gotoxy(x+padR, y+8);printf("Gabriel de Oliveira Maia - 11819790");
-    window.gotoxy(x+padR, y+9);printf("Renan Henrique de Sousa - 11802947");
-    window.gotoxy(x+padR, y+10);printf("Vitor Malosso Micheletti - 10738291");
+    window.gotoxy(x+padR, y+7);printf("  Andre Zanardi Creppe - 11802972");
+    window.gotoxy(x+padR, y+8);printf("  Gabriel de Oliveira Maia - 11819790");
+    window.gotoxy(x+padR, y+9);printf("  Renan Henrique de Sousa - 11802947");
+    window.gotoxy(x+padR, y+10);printf("  Vitor Malosso Micheletti - 10738291");
 
     window.textColor(15);
     window.gotoxy(x+14, y+12);printf("<Aperte qualquer tecla para voltar>");
@@ -307,6 +307,17 @@ void Graphics::clearMainMenu() {
             printf(" ");
         }
     }
+}
+
+void Graphics::drawExitMenu() {
+    clearMainMenu();
+
+    int x = 6, y = 3;
+
+    Window window;
+    window.gotoxy(x+4, y);printf(" Sair ");
+
+    window.gotoxy(x, y+1);printf("Confirmar sair");
 }
 
 // Gameplay
@@ -509,4 +520,91 @@ void Graphics::loading() {
     this_thread::sleep_for(chrono::milliseconds(1000));
 }
 
-void Graphics::exiting() {}
+void Graphics::exiting() {
+    // Animation anchor
+    int x1 = 36, y1 = 2;
+    int x2 = 15, y2 = 3;
+
+    int timeFuse = 150;
+    int time = 10;
+
+    // Animate fuse
+
+    Window window;
+
+    window.gotoxy(x1, y1);   cout << "       ";
+    window.gotoxy(x1, y1+1); cout << " . . .  ";
+    window.gotoxy(x1, y1+2); cout << "  \\|/  ";
+    window.gotoxy(x1, y1+3); cout << "'--+--'";
+    window.gotoxy(x1, y1+4); cout << "  /|\\ ";
+    window.gotoxy(x1, y1+5); cout << " ' | '";
+    window.gotoxy(x1, y1+6); cout << "   |";
+    this_thread::sleep_for(chrono::milliseconds(timeFuse));
+
+    window.gotoxy(x1, y1+1); cout << "       ";
+    window.gotoxy(x1, y1+2); cout << " . . .  ";
+    window.gotoxy(x1, y1+3); cout << "  \\|/  ";
+    window.gotoxy(x1, y1+4); cout << "'--+--'";
+    window.gotoxy(x1, y1+5); cout << "  /|\\ ";
+    window.gotoxy(x1, y1+6);  cout << " ' | '";
+    this_thread::sleep_for(chrono::milliseconds(timeFuse));
+
+    window.gotoxy(x1, y1+2); cout << "       ";
+    window.gotoxy(x1, y1+3); cout << " . . .  ";
+    window.gotoxy(x1, y1+4); cout << "  \\|/  ";
+    window.gotoxy(x1, y1+5); cout << "'--+--'";
+    window.gotoxy(x1, y1+6); cout << "  /|\\ ";
+    this_thread::sleep_for(chrono::milliseconds(timeFuse));
+
+    // Animate explosion
+
+    system("cls");
+
+    window.gotoxy(x2,y2+22); printf("        (/ / //  /|//||||\\\\  \\ \\  \\ _)");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+21); printf("          (     //|/l|||)|\\\\ \\     )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+20); printf("        (        |(||(||)||||        )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+19); printf("          (      ||\\(|(|)|/||     )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+18); printf("         (     ( ((((_(|)_)))))     )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+17); printf("           (   /(| / ( )) ) ) )) )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+16); printf("          (    ( ( ( | | ) ) )\\   )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+15); printf("            (   /(/ (  )  ) )\\   )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+14); printf("   ((__)        \\\\||lll|l||///          \\_))");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+13); printf("   (_((__(_(__(( ( ( |  ) ) ) )_))__))_)___)");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+12); printf("  ((  (   )(    (     _    )   _) _(_ (  (_ )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+11); printf(" ( (  ( (  (  )     (_  )  ) )  _)   ) _( ( )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+10); printf("  (  (   (  (   (_ ( ) ( _    )  ) (  )  )   )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+9); printf(" ( (  ( \\ ) (    (_  ( ) ( )  )   ) )  )) ( )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+8); printf("  ( (  (   ) (  )   (  ))     ) _)(   )  )  )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+7); printf("  (  (   (  (   ) (  _  ( _) ).  ) . ) ) ( )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+6); printf("   ( (  )    (      (  )    )   ) . ) (   )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+5); printf("    ( (  ( (_)   ((    (   )  .((_ ) .  )_");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+4); printf("     ((/  ( _(   )   (   _) ) (  () )  )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+3); printf("       ((     (   )(    )  )   (   )  )");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+2); printf("         /( (  (  )   _    ))  )   )\\");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2+1); printf("          ____/ (  (    )   )  \\___");
+    this_thread::sleep_for(chrono::milliseconds(time));
+    window.gotoxy(x2,y2);   printf("               ________________");
+
+    this_thread::sleep_for(chrono::milliseconds(1000));
+}
