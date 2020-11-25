@@ -12,6 +12,8 @@ int main() {
     window.initialConfig();
     window.hideCursor(true);
 
+    graphics.loading();
+
     int op;
     while(true) {
         graphics.drawBombCanvas();
@@ -30,6 +32,7 @@ int main() {
                 graphics.about();
                 break;
             case 3:
+                graphics.exiting();
                 return 0;
         }
     }

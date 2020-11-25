@@ -1,5 +1,7 @@
 #include <iostream>
 #include <conio.h>
+#include <chrono>
+#include <thread>
 
 #include "graphics.h"
 #include "window.h"
@@ -111,24 +113,24 @@ void Graphics::drawTNTs() {
 
 void Graphics::drawUSP() {
     // Logo anchor
-    int x1 = 8, y1 = 1;
+    int x = 8, y = 1;
 
     // Logo drawing
 
     Window window;
 
-    window.gotoxy(x1,y1);   printf("%@@@@@@@@@@@@@@@@@@@@  *@@@@@@@@@@@@@@@@.   *@@@@@@@@@@@@@@@@,");
-    window.gotoxy(x1,y1+1); printf("%@         @(        @@                 /@@@,                ,@%");
-    window.gotoxy(x1,y1+2); printf("%@         @(       (@.         %        /@                   *@,");
-    window.gotoxy(x1,y1+3); printf("%@         @(       (@           @@                 @@        *@,");
-    window.gotoxy(x1,y1+4); printf("%@         @(       (@           @@                 @@        *@,");
-    window.gotoxy(x1,y1+5); printf("%@         @(        %@&           %@@              @@        ,@,");
-    window.gotoxy(x1,y1+6); printf("%@         @(           @@,           @@,           @@        ,@,");
-    window.gotoxy(x1,y1+7); printf("%@         @(             #@%           #@&         @@########%@,");
-    window.gotoxy(x1,y1+8); printf("%@         @(                @@          *@         @@");
-    window.gotoxy(x1,y1+9); printf("%@                   @@                  /@         @@");
-    window.gotoxy(x1,y1+10);printf(" @@,                @@&@/               &@*         @@");
-    window.gotoxy(x1,y1+11);printf("   .#@@@@@@@@@@@@@&,     #@@@@@@@@@@@@@*   @@@@@@@@@@@");
+    window.gotoxy(x,y);   printf("%@@@@@@@@@@@@@@@@@@@@  *@@@@@@@@@@@@@@@@.   *@@@@@@@@@@@@@@@@,");
+    window.gotoxy(x,y+1); printf("%@         @(        @@                 /@@@,                ,@%");
+    window.gotoxy(x,y+2); printf("%@         @(       (@.         %        /@                   *@,");
+    window.gotoxy(x,y+3); printf("%@         @(       (@           @@                 @@        *@,");
+    window.gotoxy(x,y+4); printf("%@         @(       (@           @@                 @@        *@,");
+    window.gotoxy(x,y+5); printf("%@         @(        %@&           %@@              @@        ,@,");
+    window.gotoxy(x,y+6); printf("%@         @(           @@,           @@,           @@        ,@,");
+    window.gotoxy(x,y+7); printf("%@         @(             #@%           #@&         @@########%@,");
+    window.gotoxy(x,y+8); printf("%@         @(                @@          *@         @@");
+    window.gotoxy(x,y+9); printf("%@                   @@                  /@         @@");
+    window.gotoxy(x,y+10);printf(" @@,                @@&@/               &@*         @@");
+    window.gotoxy(x,y+11);printf("   .#@@@@@@@@@@@@@&,     #@@@@@@@@@@@@@*   @@@@@@@@@@@");
 }
 
 // Pages
@@ -387,3 +389,124 @@ void Graphics::gameOver(int points) {
     window.gotoxy(x, y+3);printf("Tecle algo pra");
     window.gotoxy(x, y+4);printf("voltar ao menu");
 }
+
+// Animations
+void Graphics::loading() {
+    // Animation anchor
+    int x1 = 1, y1 = 3;
+    int x2 = 15, y2 = 16;
+    int delay = 100;
+
+    Window window;
+
+    // Title drawing
+
+    window.gotoxy(x1,y1);   printf("___  ____   __ ___ ___  ________ _____  ___  ________ _    _  ___ ______ _____");
+    window.gotoxy(x1,y1+1); printf("|  \\/  | | / // _ \\|  \\/  | ___ |  _  | |  \\/  |_   _| \\ | |/ _ \\|  _  |  _  |");
+    window.gotoxy(x1,y1+2); printf("| .  . | |/ // /_\\ | .  . | |_/ | | | | | .  . | | | |  \\| / /_\\ | | | | | | |");
+    window.gotoxy(x1,y1+3); printf("| |\\/| |    \\|  _  | |\\/| |  __/| | | | | |\\/| | | | | . ` |  _  | | | | | | |");
+    window.gotoxy(x1,y1+4); printf("| |  | | |\\  | | | | |  | | |   \\ \\_/ / | |  | |_| |_| |\\  | | | | |/ /\\ \\_/ /");
+    window.gotoxy(x1,y1+5); printf("\\_|  |_\\_| \\_\\_| |_\\_|  |_\\_|    \\___/  \\_|  |_/\\___/\\_| \\_\\_| |_|___/  \\___/");
+
+    // Animation drawing
+
+    window.gotoxy(x2,y2);   printf(" ______________________________     . \\  | /  .");
+    window.gotoxy(x2,y2+1); printf("/                            / \\     \\ \\ / /");
+    window.gotoxy(x2,y2+2); printf("|                            | ==========  - - -");
+    window.gotoxy(x2,y2+3); printf("\\____________________________\\_/     / / \\ \\");
+    window.gotoxy(x2,y2+4); printf("                                    .  / | \\  .");
+
+    window.textColor(15);
+    window.gotoxy(x2+8, y2+2); printf("LOADING [0%]");
+
+    this_thread::sleep_for(chrono::milliseconds(400));
+
+    // Animation - TNT body
+
+    for(int i=0; i<29; i++) {
+        window.textColor(12);
+
+        if(i == 0) {
+            window.gotoxy(x2, y2+1); printf("/");
+            window.gotoxy(x2, y2+2); printf("|");
+            window.gotoxy(x2, y2+3); printf("\\");
+        } else {
+            window.gotoxy(x2+i, y2); printf("_");
+            window.gotoxy(x2+i, y2+3); printf("_");
+        }
+
+        window.textColor(15);
+        window.gotoxy(x2+16, y2+2); printf("[%d%]", i*2);
+
+        this_thread::sleep_for(chrono::milliseconds(delay));
+    }
+
+    window.textColor(12);
+    window.gotoxy(x2+29, y2+0); printf("_");
+    window.gotoxy(x2+29, y2+1); printf("/");
+    window.gotoxy(x2+29, y2+2); printf("|");
+    window.gotoxy(x2+29, y2+3); printf("\\");
+
+    window.textColor(15);
+    window.gotoxy(x2+16, y2+2); printf("[%d%]", 60);
+
+    this_thread::sleep_for(chrono::milliseconds(delay));
+
+    window.textColor(12);
+    window.gotoxy(x2+30, y2); printf("_");
+    window.gotoxy(x2+30, y2+1); printf(" \\");
+    window.gotoxy(x2+30, y2+3); printf("_/");
+
+    window.textColor(15);
+    window.gotoxy(x2+16, y2+2); printf("[%d%]", 64);
+
+    this_thread::sleep_for(chrono::milliseconds(delay));
+
+    // Animation - TNT fuse
+
+    for(int i=31; i<41; i++) {
+        window.textColor(8);
+        window.gotoxy(x2+i, y2+2); printf("=");
+
+        window.textColor(15);
+        window.gotoxy(x2+16, y2+2); printf("[%d%]", i+36);
+
+        this_thread::sleep_for(chrono::milliseconds(delay));
+    }
+
+    // Animation - Sparks
+
+    window.textColor(14);
+    window.gotoxy(x2+37, y2+1); printf("\\ \\ / /");
+    window.gotoxy(x2+37, y2+3); printf("/ / \\ \\");
+
+    window.textColor(15);
+    window.gotoxy(x2+16, y2+2); printf("[%d%]", 81);
+
+    this_thread::sleep_for(chrono::milliseconds(delay));
+
+    window.textColor(14);
+    window.gotoxy(x2+36, y2); printf(". \\  | /  .");
+    window.gotoxy(x2+36, y2+4); printf(".  / | \\  .");
+
+    window.textColor(15);
+    window.gotoxy(x2+16, y2+2); printf("[%d%]", 86);
+
+    this_thread::sleep_for(chrono::milliseconds(delay));
+
+    for(int i=43; i<48; i+=2) {
+        window.textColor(14);
+        window.gotoxy(x2+i, y2+2); printf("-");
+
+        window.textColor(15);
+        window.gotoxy(x2+16, y2+2); printf("[%d%]", i+46);
+
+        this_thread::sleep_for(chrono::milliseconds(delay));
+    }
+
+    window.gotoxy(x2+8, y2+2); printf("LOADING COMPLETE!");
+
+    this_thread::sleep_for(chrono::milliseconds(1000));
+}
+
+void Graphics::exiting() {}
