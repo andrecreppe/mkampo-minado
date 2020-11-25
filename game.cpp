@@ -16,7 +16,7 @@ void Game::playMineField() {
     Menu menu;
     Graphics graphics;
     int points = 0;
-    int maxPoints = 2;
+    int maxPoints = 88;
 
     initializeField();
 
@@ -33,17 +33,23 @@ void Game::playMineField() {
         int y = menu.rowSelection(graphicField);
         int x = menu.columnSelection(y, graphicField);
 
+        if(graphicField[y][x] > 0) { // already steped
+            continue;
+        }
+
         int op = menu.cellOperation();
 
         switch (op) {
-            case 0: // Step on mine
-                if(mineField[y][x] == -2) {
+            case 0: // Step
+
+                if(mineField[y][x] == -2) { // on mine
                     graphics.showMines(mineField);
                     graphics.gameOver(points, false);
                     getch();
                     return;
                 }
 
+                // on nothing
                 count3x3(y, x);
                 points++;
                 break;
