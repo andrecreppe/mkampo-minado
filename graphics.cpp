@@ -96,19 +96,25 @@ void Graphics::drawTNTs() {
 
     Window window;
 
+    window.textColor(8);
     window.gotoxy(x1,y1);  printf("  )");
     window.gotoxy(x1,y1+1);printf(" (");
-    window.gotoxy(x1,y1+2);printf(".-`-.");
-    window.gotoxy(x1,y1+3);printf(":   :");
-    window.gotoxy(x1,y1+4);printf(":TNT:");
-    window.gotoxy(x1,y1+5);printf(":___:");
-
     window.gotoxy(x2,y2);  printf("  )");
     window.gotoxy(x2,y2+1);printf(" (");
+
+    window.textColor(12);
+    window.gotoxy(x1,y1+2);printf(".-`-.");
+    window.gotoxy(x1,y1+3);printf(":   :");
+    window.gotoxy(x1,y1+4);printf(":   :");
+    window.gotoxy(x1,y1+5);printf(":___:");
     window.gotoxy(x2,y2+2);printf(".-`-.");
     window.gotoxy(x2,y2+3);printf(":   :");
-    window.gotoxy(x2,y2+4);printf(":TNT:");
+    window.gotoxy(x2,y2+4);printf(":   :");
     window.gotoxy(x2,y2+5);printf(":___:");
+
+    window.textColor(15);
+    window.gotoxy(x1+1,y1+4);printf("TNT");
+    window.gotoxy(x2+1,y2+4);printf("TNT");
 }
 
 void Graphics::drawUSP() {
